@@ -2,3 +2,166 @@ syntax on
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
+" tonym
+:set enc=utf-8
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set wildmode=list:full " complete by default, show as well
+set wildignore=*.o,*.obj,*.bak,*.exe,*.tmp
+set showmatch " show the matching bracket
+set ic     		" default to ignore case
+set ts=4		" tabstop will be 4
+set sw=4        " shift width is 4 too
+set autoindent		" always set autoindenting on
+set nobackup		" no backup file
+set directory=~/tmp,/var/tmp,/tmp " where to save .swp files
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set hidden      " allow dirty buffers
+set incsearch		" do incremental searching
+set scrolloff=3             " Keep 3 lines below and above the cursor
+set vb           " use visual bell instead of annoying pc speaker
+set complete+=k
+set complete+=]
+set autoread     " automatically re-read files that have changed outside vim when there are no inside changes
+" auto-search the following dirs when using the find command
+" the last part means to search the current dir 2-deep
+set path=~/Desktop/,.,**10
+if has("gui")
+	set cursorline   " highlight current line
+endif
+set nowrap  " no auto-wrap of lines, annoying
+
+" Make p in Visual mode replace the selected text with the "" register.
+vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if  has("gui_running")
+	" set guioptions+=b
+	set guifont=Monaco:h12.00
+	if getftype("~/.vim/doc") == "dir"
+		helptags ~/.vim/doc
+	endif
+	syntax on
+	set hlsearch
+    " set background=light
+	colorscheme solarized
+	" highlight active line
+	hi CursorLine  guibg=lightyellow
+else
+    set background=dark
+endif
+
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " For all text files set 'textwidth' 
+  autocmd FileType text setlocal textwidth=80
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+	autocmd BufReadPost *
+		\ if line("'\"") > 0 && line("'\"") <= line("$") |
+		\	exe "normal g`\"" |
+		\ endif
+	autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+	" have :make do php lint with error-jumping
+	autocmd FileType php set makeprg=php\ -l\ % 
+	autocmd FileType php set errorformat=%m\ in\ %f\ on\ line\ %l
+	"expandtab php files
+	autocmd FileType php set et
+	" fold on indents
+	autocmd FileType php set fdm=indent
+	" add keyword dictionary and tags to completion list
+	autocmd FileType php set dictionary+=~/.vim/php_funcs.txt
+	" PHPDOC lookup using "L"
+	autocmd FileType php map L :!/opt/local/bin/lynx -dump http://us2.php.net/ \| less +\/Description
+	autocmd FileType php noremap <Leader>r :vimgrep // server/**/*php
+	autocmd FileType javascript set et
+	autocmd FileType python set makeprg=python\ -m\ py_compile\ %
+	autocmd Filetype xml set makeprg="xmllint % >/dev/null"
+	autocmd FileType ruby set makeprg=ruby\ -w\ -c\ % 
+	"autocmd FileType eruby set makeprg=erb\ -P\ -x\ -T\ '-'\ %\|\ ruby\ -c
+	autocmd FileType sh set makeprg=bash\ -n\ % 
+endif " has("autocmd")
+
+" PHPCS
+" Pass arguments to phpcs binary
+let g:phpqa_codesniffer_args = "--standard=PSR2"
+" PHP codesniffer binary (default = phpcs)
+let g:phpqa_codesniffer_cmd='~/pear/bin/phpcs'
+"end PHPCS
+
+"PHPMD
+let g:phpqa_messdetector_ruleset = "~/pear/data/PHP_PMD/resources/rulesets/cleancode.xml"
+" PHP mess detector binary (default = phpmd)
+let g:phpqa_messdetector_cmd='~/pear/bin/phpmd'
+"end PHPMD
+
+" mapping
+let mapleader = ","
+" Jump to prev/next buffer with c-h/c-j
+map <c-k> :bp<cr>
+map <c-j> :bn<cr>
+map <c-n> :cn<cr>
+"map <c-p> :cp<cr>
+" Poor man's buffer explorer
+map <leader>b :ls<cr>:buf 
+"  Delete current buffer.
+map <leader>d <esc>:bd<cr>
+" make it easy to reload vimrc
+nmap <Leader>s :source $MYVIMRC
+nmap <Leader>v :e $MYVIMRC
+
+vmap <leader>s <esc>:'<,'>sort<cr>
+
+" Bash like keys for the command line
+cnoremap <C-A>      <Home>
+cnoremap <C-E>      <End>
+cnoremap <C-K>      <C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+
+
+"insert mode shortcuts
+" shortcut
+inoremap  <C-R>=strftime("(%b-%d) ")<CR>
+
+" abbrevations
+iab  <expr> dts strftime("%c")
+iab  <expr> sdts strftime("%b-%d")
+iab  yi yahoo-inc.com
+iab  sas (see action support)
+iab if$ if(){<cr><cr>}<up><up><right><right>
+iab while$ while(){<cr><cr>}<up><up><right><right><right><right><right>
+iab foreach$ foreach(){<cr><cr>}<up><up><right><right>
+iab for$ for(;;){<cr><cr>}<up><up><right><right><right>
+
+"set filetype to twiki for everything in ~/.twiki
+auto BufEnter ~/.twiki/*  set filetype=twiki tw=80
+
+" encrypt, decrypt to self using gpg
+" will prompt for passphrase
+command! -range Enc '<,'>!/usr/local/bin/gpg -aes -r metzidis 2>/dev/null
+command!  -range Dec '<,'>!/usr/local/bin/gpg -d  2>/dev/null
+" pathogen
+execute pathogen#infect()
+
