@@ -7,5 +7,5 @@ zstyle ':completion:*' insert-tab pending
 # AWS CLI
 #
 if [[ -a /usr/local/bin/aws_zsh_completer.sh ]]; then
-	source /usr/local/bin/aws_zsh_completer.sh
+	#source /usr/local/bin/aws_zsh_completer.sh
 fi

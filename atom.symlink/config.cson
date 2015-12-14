@@ -5,6 +5,9 @@
     invisibles: {}
     fontSize: 15
     softWrapAtPreferredLineLength: true
+  whitespace:
+    removeTrailingWhitespace: false
+    ensureSingleTrailingNewline: false
   core:
     ignoredNames: [
       ".bundle"
@@ -23,8 +26,9 @@
       "background-tips"
       "exception-reporting"
       "metrics"
+      "atom-jshint"
     ]
-    followSymlinks: false
+    excludeVcsIgnoredPaths: false
   "spell-check":
     grammars: [
       "text.plain"
@@ -35,5 +39,8 @@
     showOnStartup: false
   "release-notes":
     viewedVersion: "0.89.0"
-  "go-plus":
-    goPath: "/Users/holman/Code/go"
+  "project-quick-open":
+    projectPaths: "~/GoogleDrive/Documents/workspace/,/Users/tonym/insomniac"
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "vim-mode": {}
