@@ -1,14 +1,13 @@
 "*":
-  editor:
-    showIndentGuide: true
-    fontFamily: "Menlo"
-    invisibles: {}
-    fontSize: 15
-    softWrapAtPreferredLineLength: true
-  whitespace:
-    removeTrailingWhitespace: false
-    ensureSingleTrailingNewline: false
   core:
+    disabledPackages: [
+      "background-tips"
+      "exception-reporting"
+      "metrics"
+      "atom-jshint"
+    ]
+    excludeVcsIgnoredPaths: false
+    hideGitIgnoredFiles: true
     ignoredNames: [
       ".bundle"
       ".git"
@@ -21,26 +20,27 @@
       "unity-ui"
       "glacier-syntax"
     ]
-    hideGitIgnoredFiles: true
-    disabledPackages: [
-      "background-tips"
-      "exception-reporting"
-      "metrics"
-      "atom-jshint"
-    ]
-    excludeVcsIgnoredPaths: false
+  editor:
+    fontFamily: "Menlo"
+    fontSize: 15
+    invisibles: {}
+    showIndentGuide: true
+    softWrapAtPreferredLineLength: true
+  "project-quick-open":
+    projectPaths: "~/GoogleDrive/Documents/workspace/,/Users/tonym/insomniac"
+  "release-notes":
+    viewedVersion: "0.89.0"
   "spell-check":
     grammars: [
       "text.plain"
       "source.gfm"
       "text.git-commit"
     ]
-  welcome:
-    showOnStartup: false
-  "release-notes":
-    viewedVersion: "0.89.0"
-  "project-quick-open":
-    projectPaths: "~/GoogleDrive/Documents/workspace/,/Users/tonym/insomniac"
   "tree-view":
     hideVcsIgnoredFiles: true
   "vim-mode": {}
+  welcome:
+    showOnStartup: false
+  whitespace:
+    ensureSingleTrailingNewline: false
+    removeTrailingWhitespace: false
