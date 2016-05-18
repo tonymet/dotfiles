@@ -1,4 +1,5 @@
 "*":
+  "autocomplete-python": {}
   core:
     disabledPackages: [
       "background-tips"
