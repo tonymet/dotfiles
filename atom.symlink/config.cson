@@ -17,18 +17,18 @@
       "tmp"
       "vendor"
     ]
+    openEmptyEditorOnStart: false
     themes: [
       "unity-ui"
       "glacier-syntax"
     ]
   editor:
     fontFamily: "Menlo"
-    fontSize: 15
     invisibles: {}
     showIndentGuide: true
     softWrapAtPreferredLineLength: true
   "project-quick-open":
-    projectPaths: "~/GoogleDrive/Documents/workspace/,/Users/tonym/insomniac"
+    projectPaths: "~/tigertext"
   "release-notes":
     viewedVersion: "0.89.0"
   "spell-check":
