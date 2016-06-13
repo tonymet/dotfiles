@@ -48,6 +48,11 @@ function tt-version(){
 				echo $n ; curl -s https://$n-console.tigertext.me/git.info
 			done
 		;;
+		"web-cn")
+			for n in qa uat dev stag; do
+				echo $n ; curl -s https://$n-console.tigertext.me/cn/git.info
+			done
+		;;
 		*)
 			echo "we dont' know nothing about $1"
 			return -1
