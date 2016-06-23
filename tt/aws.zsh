@@ -5,6 +5,9 @@ function tt-instances(){
 		"dev/cn")
 			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Services,Values=*cn*' 'Name=tag:Environment,Values=development'|jq '.Reservations[].Instances[].PublicDnsName'
 		;;
+		"uat/all")
+			aws --profile=tigertext.$USER ec2 describe-instances  --filters 'Name=tag:Environment,Values=uat'|jq '.Reservations[].Instances[].Tags[]|select(.Key|contains("Name"))|.Value'
+		;;
 		"dev/paging")
 			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Services,Values=*pag*' 'Name=tag:Environment,Values=development'|jq '.Reservations[].Instances[].PublicDnsName'
 		;;
@@ -13,6 +16,12 @@ function tt-instances(){
 		;;
 		"prod/cn")
 			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Services,Values=*cn*' 'Name=tag:Environment,Values=production'|jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
+		;;
+		"all/redis")
+			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Service,Values=*redis*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
+		;;
+		"all/webdata")
+			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Name,Values=*webdata*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
 		;;
 		*)
 			echo "we don't know nothing about $1"
@@ -47,11 +56,13 @@ function tt-version(){
 			for n in qa uat dev stag; do
 				echo $n ; curl -s https://$n-console.tigertext.me/git.info
 			done
+			echo 'prod' ; curl -s https://home.tigertext.com/git.info
 		;;
 		"web-cn")
 			for n in qa uat dev stag; do
 				echo $n ; curl -s https://$n-console.tigertext.me/cn/git.info
 			done
+			echo 'prod' ; curl -s https://home.tigertext.com/cn/git.info
 		;;
 		*)
 			echo "we dont' know nothing about $1"
