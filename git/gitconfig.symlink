@@ -4,15 +4,15 @@
 [hub]
         protocol = https
 [user]
-	name =
-	email =
+	name = Anthony Metzidis
+	email = ametzidis@tigertext.com
 [credential]
         helper = osxkeychain
 [alias]
         co = checkout
         promote = !$ZSH/bin/git-promote
         wtf     = !$ZSH/bin/git-wtf
-        rank-contributors = !$ZSH/bin/git-rank-contributors
+		topcoders =  shortlog --all --no-merges -n -s
         count   = !git shortlog -sn
         lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [color]
@@ -48,3 +48,5 @@
 	trustExitCode = true
 [commit]
 	template = /Users/anthonymetzidis/.stCommitMsg
+[format]
+	pretty = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
