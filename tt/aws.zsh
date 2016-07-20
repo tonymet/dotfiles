@@ -23,6 +23,12 @@ function tt-instances(){
 		"all/webdata")
 			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Name,Values=*webdata*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
 		;;
+		"all/uscc")
+			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Name,Values=*uscc*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
+		;;
+		"qa/all")
+			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Environment,Values=qa' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
+		;;
 		*)
 			echo "we don't know nothing about $1"
 			return -1
@@ -63,6 +69,9 @@ function tt-version(){
 				echo $n ; curl -s https://$n-console.tigertext.me/cn/git.info
 			done
 			echo 'prod' ; curl -s https://home.tigertext.com/cn/git.info
+		;;
+		"uscc")
+			ssh -t aries ssh uscc.tigertext.me 'sh -c \"ls --sort time /mnt/opt/releases/uscc_billing\"'|head -n 1
 		;;
 		*)
 			echo "we dont' know nothing about $1"
