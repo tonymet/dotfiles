@@ -18,7 +18,10 @@ function tt-instances(){
 			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Services,Values=*cn*' 'Name=tag:Environment,Values=production'|jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
 		;;
 		"all/redis")
-			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Service,Values=*redis*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
+			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Services,Values=*redis*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
+		;;
+		"all/paging")
+			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Services,Values=*paging*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
 		;;
 		"all/webdata")
 			aws --profile=tigertext.$USER ec2 describe-instances --filters 'Name=tag:Name,Values=*webdata*' |jq '.Reservations[].Instances[].Tags[]|select(.Key | contains("Name"))|.Value';
@@ -78,4 +81,23 @@ function tt-version(){
 			return -1
 		;;
 	esac
+}
+
+
+function tt-verizon-env(){
+	case $1 in
+		"start")
+			aws --profile=ttwebdev/ametzidis opsworks start-stack --stack-id=0ff85b28-d31c-4b92-b2a3-af2bf889daaf
+		;;
+		"stop")
+			aws --profile=ttwebdev/ametzidis opsworks stop-stack --stack-id=0ff85b28-d31c-4b92-b2a3-af2bf889daaf
+		;;
+		*)
+			echo "$1 is not supported"
+			return -1
+		;;
+	esac
+
+
+
 }
