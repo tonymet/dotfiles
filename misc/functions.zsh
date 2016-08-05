@@ -29,3 +29,7 @@ function rman(){
   fi
   ronn -m $docs/$1.md
 }
+
+function urldecode(){
+	python -c "import sys;import urllib;print urllib.unquote(''.join(sys.stdin.readlines())).decode('utf8') "
+}
