@@ -25,8 +25,8 @@
   editor:
     fontFamily: "Menlo"
     invisibles: {}
-    showInvisibles: true
     showIndentGuide: true
+    showInvisibles: true
     softWrapAtPreferredLineLength: true
   "project-quick-open":
     projectPaths: "~/tigertext"

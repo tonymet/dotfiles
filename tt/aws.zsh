@@ -101,3 +101,13 @@ function tt-verizon-env(){
 
 
 }
+
+# open security group to my ip
+function tt-vpn(){
+	sgs=(sg-41fb453b)
+
+	for g in $sgs; do
+		echo "opening $g"
+		aws ec2 --profile=ttwebdev.$USER authorize-security-group-ingress --protocol tcp --port 0-65535 --cidr $(dig +short myip.opendns.com @resolver1.opendns.com)/32 --group-id sg-41fb453b
+	done
+}
