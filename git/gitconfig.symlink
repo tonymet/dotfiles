@@ -6,8 +6,6 @@
 [user]
 	name = Anthony Metzidis
 	email = ametzidis@tigertext.com
-[credential]
-        helper = osxkeychain
 [alias]
         co = checkout
         promote = !$ZSH/bin/git-promote
@@ -50,3 +48,5 @@
 	template = /Users/anthonymetzidis/.stCommitMsg
 [format]
 	pretty = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+[diff]
+	tool = opendiff

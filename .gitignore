@@ -7,3 +7,4 @@ atom.symlink/storage
 atom.symlink/themes
 
 git/gitconfig.symlink
+oh-my-zsh
