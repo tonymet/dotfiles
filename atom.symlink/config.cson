@@ -1,14 +1,29 @@
 "*":
+  "api-docs":
+    _theme: "Dark"
+    async: true
+    chai: true
+    "docker~1":
+      "13": true
+    express: true
+    jquery: true
+    knockout: true
+    "lodash~3": true
+    "node~6_lts": true
+    npm: true
+    react: true
+    webpack: true
   "autocomplete-python": {}
+  autosave:
+    enabled: true
   core:
     disabledPackages: [
       "background-tips"
       "exception-reporting"
       "metrics"
       "atom-jshint"
-      "activate-power-mode"
+      "atom-ternjs"
     ]
-    excludeVcsIgnoredPaths: false
     hideGitIgnoredFiles: true
     ignoredNames: [
       ".bundle"
@@ -17,6 +32,7 @@
       "tmp"
       "vendor"
       "node_modules"
+      "dist"
     ]
     openEmptyEditorOnStart: false
     telemetryConsent: "no"
@@ -24,12 +40,16 @@
       "unity-ui"
       "glacier-syntax"
     ]
+    warnOnLargeFileLimit: 5
   editor:
     fontFamily: "Menlo"
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
     softWrapAtPreferredLineLength: true
+  "linter-eslint":
+    disableFSCache: true
+  "linter-ui-default": {}
   "project-quick-open":
     projectPaths: "~/tigertext"
   "release-notes":
@@ -47,6 +67,8 @@
     hideIgnoredNames: true
     hideVcsIgnoredFiles: true
   "vim-mode": {}
+  "vim-mode-plus":
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
   welcome:
     showOnStartup: false
   whitespace:

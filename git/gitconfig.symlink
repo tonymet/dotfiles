@@ -4,49 +4,62 @@
 [hub]
         protocol = https
 [user]
-	name = Anthony Metzidis
-	email = ametzidis@tigertext.com
+    name = Anthony Metzidis
+    email = ametzidis@tigertext.com
 [alias]
-        co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-		topcoders =  shortlog --all --no-merges -n -s
-        count   = !git shortlog -sn
-        lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    co = checkout
+    promote = !$ZSH/bin/git-promote
+    wtf     = !$ZSH/bin/git-wtf
+    topcoders =  shortlog --all --no-merges -n -s
+    count   = !git shortlog -sn
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    prune = fetch --prune
+    undo = reset --soft HEAD^
+    stash-all = stash save --include-untracked
+	fixup = !sh -c 'git commit --fixup=HEAD' -
+	ri = rebase --interactive --autosquash HEAD~2
+
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [core]
-        excludesfile = ~/.gitignore
-        editor = vim
+	excludesfile = /Users/anthonymetzidis/.gitignore
+    editor = vim
 [apply]
-        whitespace = nowarn
+    whitespace = nowarn
+[merge]
+    ff = only
+	tool = opendiff
 [mergetool]
-        keepBackup = false
+    keepBackup = false
 [difftool]
-        prompt = false
+    prompt = false
 [help]
-        autocorrect = 1
+    autocorrect = 1
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
-        default = simple
+    # See `git help config` (search for push.default)
+    # for more information on different options of the below setting.
+    #
+    # Setting to git 2.0 default to suppress warning message
+    default = simple
 [log]
-	pretty=oneline
-	mailmap = true
+    pretty=oneline
+    mailmap = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.3/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /usr/local/Caskroom/sourcetree/2.3/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/anthonymetzidis/.stCommitMsg
+    template = /Users/anthonymetzidis/.stCommitMsg
 [format]
-	pretty = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+    pretty = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [diff]
-	tool = opendiff
+    tool = opendiff
+[transfer]
+    fsckobjects = true
+[rebase]
+	autoSquash = true
