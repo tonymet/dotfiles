@@ -4,8 +4,9 @@
 [hub]
         protocol = https
 [user]
-    name = Anthony Metzidis
-    email = ametzidis@tigertext.com
+	name = Anthony Metzidis
+	email = anthony.metzidis@gmail.com
+	signingkey = B88ECBC86121522B
 [alias]
     co = checkout
     promote = !$ZSH/bin/git-promote
@@ -27,6 +28,7 @@
 [core]
 	excludesfile = /Users/anthonymetzidis/.gitignore
     editor = vim
+	pager = less -F -X
 [apply]
     whitespace = nowarn
 [merge]
@@ -47,14 +49,13 @@
 [log]
     pretty=oneline
     mailmap = true
+	no-pager=true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /usr/local/Caskroom/sourcetree/2.3/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[commit]
-    template = /Users/anthonymetzidis/.stCommitMsg
 [format]
     pretty = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [diff]
@@ -63,3 +64,10 @@
     fsckobjects = true
 [rebase]
 	autoSquash = true
+[credential "https://source.developers.google.com"]
+	helper = gcloud.sh
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[commit]
+	gpgsign = true

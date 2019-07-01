@@ -13,7 +13,8 @@
     npm: true
     react: true
     webpack: true
-  "autocomplete-python": {}
+  "autocomplete-python":
+    useKite: false
   autosave:
     enabled: true
   core:
@@ -21,8 +22,10 @@
       "background-tips"
       "exception-reporting"
       "metrics"
-      "atom-jshint"
       "atom-ternjs"
+      "jshint"
+      "angularjs"
+      "autocomplete-python"
     ]
     hideGitIgnoredFiles: true
     ignoredNames: [
@@ -50,6 +53,8 @@
   "linter-eslint":
     disableFSCache: true
   "linter-ui-default": {}
+  "markdown-writer":
+    fileExtension: ".md"
   "project-quick-open":
     projectPaths: "~/tigertext"
   "release-notes":
@@ -67,8 +72,7 @@
     hideIgnoredNames: true
     hideVcsIgnoredFiles: true
   "vim-mode": {}
-  "vim-mode-plus":
-    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
+  "vim-mode-plus": {}
   welcome:
     showOnStartup: false
   whitespace:
